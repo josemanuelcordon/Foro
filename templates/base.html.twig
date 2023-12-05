@@ -11,6 +11,13 @@
         {% endblock %}
     </head>
     <body>
+    <h1>Mis Foros</h1>
+    {% if app.user %}
+        <p>Hola {{ app.user.username }}</p>
+        <a href="/logout">Log Out</a>
+    {% else %}
+        <a href="/login">Log In</a>
+    {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>

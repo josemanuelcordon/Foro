@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum index{% endblock %}
+
+{% block body %}
+
+
+        {% for forum in forums %}
+        <h3><a href="{{ path('app_forum_show', {'id': forum.id}) }}">{{ forum.name }}</a></h3>
+        <p>{{ forum.description }}</p>
+        <hr>
+        {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_forum_edit', {'id': forum.id}) }}">edit</a>
+        {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_forum_new') }}">Create new</a>
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_forum_index') }}">back to list</a>
+    <h1>{{ forum.name }}</h1>
+    <p>{{ forum.description }}</p>
+    <hr>
+    {% for thread in forum.threads %}
+        {{ thread.title }}
+    {% endfor %}
+
+    
+    {% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('app_forum_edit', {'id': forum.id}) }}">edit</a>
+
+    {{ include('forum/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}
