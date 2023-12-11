@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ThreadType extends AbstractType
 {
@@ -16,17 +17,9 @@ class ThreadType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('createdDate')
-            ->add('status')
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
-            ->add('forum', EntityType::class, [
-                'class' => Forum::class,
-'choice_label' => 'id',
-            ])
-        ;
+            ->add('text', TextAreaType::class, [
+                'mapped' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

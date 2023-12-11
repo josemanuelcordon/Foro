@@ -3,13 +3,20 @@
 {% block title %}Forum{% endblock %}
 
 {% block body %}
-
-    <a href="{{ path('app_forum_index') }}">back to list</a>
+    <br>
+    <a href="{{ path('app_forum_index') }}">back to list</a><br>
+    <a href="{{ path('app_thread_new', {'id': forum.id}) }}">Crear Hilo</a>
     <h1>{{ forum.name }}</h1>
     <p>{{ forum.description }}</p>
     <hr>
     {% for thread in forum.threads %}
-        {{ thread.title }}
+    {% if thread.status == 1 or is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_thread_show', {'id': thread.id})}}">{{ thread.title }}</a>
+        <hr style="margin-left: 50px">
+        {% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('app_thread_hide', {'id': thread.id}) }}">Ocultar</a>
+    {% endif %}
+    {% endif %}
     {% endfor %}
 
     
